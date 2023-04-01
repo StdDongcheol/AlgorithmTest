@@ -1,7 +1,4 @@
-﻿// 11004.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
-
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -15,11 +12,18 @@ void MySwap(vector<int>& A, int i, int j)
 
 int Partition(std::vector<int>& Arr, int Start, int End)
 {
+    if (Start + 1 == End)
+    {
+        if (Arr[Start] > Arr[End])
+            MySwap(Arr, Start, End);
+        return End;
+    }
     // Pivot값을 적당한 한가운데를 선정.
     int PivotIndex = (Start + End) / 2;
 
     // StartIndex, EndIndex 증감의 편의성을 위해 
     // PivotIndex와 Start의 위치를 교체.
+    // Arr[Start] : Pivot Value
     MySwap(Arr, PivotIndex, Start);
 
     int StartIndex = Start + 1;
@@ -44,8 +48,7 @@ int Partition(std::vector<int>& Arr, int Start, int End)
             break;
     }
 
-    // Pivot값을 기준으로 계속 정렬하고 있었으므로 
-    // Start에 있던 Pivot을 StartIndex와 EndIndex가 겹쳐진 위치로 복원.
+
     MySwap(Arr, Start, EndIndex);
 
     // Swap하고난뒤 현재 StartIndex는 곧 전에 사용되던 Pivot값.
@@ -72,10 +75,14 @@ int main()
 {
     int N, K;
 
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
     cin >> N >> K;
     vector<int> A(N, 0);
-    
-    for (int i = 0; i < N; i++) 
+
+    for (int i = 0; i < N; i++)
     {
         cin >> A[i];
     }
