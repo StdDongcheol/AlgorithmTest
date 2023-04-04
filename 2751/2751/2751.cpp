@@ -1,86 +1,83 @@
-﻿// 2751.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
-
+﻿
 #include <iostream>
 #include <vector>
 
-using namespace std;
 
-int N;
-std::vector<int> Arr;
-std::vector<int> TempArr;
+std::vector<int> Data;
+std::vector<int> TempData;
 
-void Merge(int S, int E)
+
+void MergeSorting(int S, int E)
 {
-    if (E - S < 1)
-    {
-        return;
-    }
+	if (E - S < 1)
+		return;
 
-    int Middle = S + (E - S) / 2;
+	int Middle = S + (E - S) / 2;
 
-    Merge(S, Middle);
-    Merge(Middle + 1, E);
+	MergeSorting(S, Middle);
+	MergeSorting(Middle + 1, E);
 
-    int MergePoint = S;
-    int L = S;
-    int R = Middle + 1;
+	int TempIndex = S;
+	int LIndex = S;
+	int RIndex = Middle + 1;
 
-    for (int i = S; i <= E; ++i)
-    {
-        TempArr[i] = Arr[i];
-    }
+	for (int i = S; i <= E; ++i)
+	{
+		TempData[i] = Data[i];
+	}
 
-    while (L <= Middle && R <= E)
-    {
-        if (TempArr[L] < TempArr[R])
-        {
-            Arr[MergePoint] = TempArr[L];
-            ++MergePoint;
-            ++L;
-        }
+	while (LIndex <= Middle && RIndex <= E)
+	{
+		if (TempData[LIndex] < TempData[RIndex])
+		{
+			Data[TempIndex] = TempData[LIndex];
+			++LIndex;
+			++TempIndex;
+		}
 
-        else
-        {
-            Arr[MergePoint] = TempArr[R];
-            MergePoint++;
-            ++R;
-        }
-    }
+		else if (TempData[RIndex] < TempData[LIndex])
+		{
+			Data[TempIndex] = TempData[RIndex];
+			++RIndex;
+			++TempIndex;
+		}
+	}
 
-    while (L <= Middle)
-    {
-        Arr[MergePoint] = TempArr[L];
-        ++MergePoint;
-        ++L;
-    }
-    while (R <= E)
-    {
-        Arr[MergePoint] = TempArr[R];
-        ++MergePoint;
-        ++R;
-    }
+	while (LIndex <= Middle)
+	{
+		Data[TempIndex] = TempData[LIndex];
+		++LIndex;
+		++TempIndex;
+	}
+	
+	while (RIndex <= E)
+	{
+		Data[TempIndex] = TempData[RIndex];
+		++RIndex;
+		++TempIndex;
+	}
 }
 
 int main()
 {
+	int N;
 
-    std::cin >> N;
+	std::cin >> N;
 
-    Arr.resize(N + 1, 0);
-    TempArr.resize(N + 1, 0);
+	Data.resize(N + 1, 0);
+	TempData.resize(N + 1, 0);
 
-    for (int i = 1; i <= N; ++i) 
-    {
-        std::cin >> Arr[i];
-    }
+	for (int i = 1; i <= N; ++i)
+	{
+		std::cin >> Data[i];
+	}
 
-    Merge(1, N);
+	MergeSorting(1, N);
 
-    for (int i = 1; i <= N; ++i)
-    {
-        std::cout << Arr[i] << "\n";
-    }
+	for (int i = 1; i <= N; ++i)
+	{
+		std::cout << Data[i];
+	}
 
-    return 0;
+	return 0;
 }

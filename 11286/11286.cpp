@@ -1,11 +1,8 @@
-﻿// 11286.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
-
-#include <iostream>
-#include <deque>
+﻿#include <iostream> 
 #include <queue>
-#include <algorithm>
 #include <vector>
+
+using namespace std;
 
 struct MyCompare
 {
@@ -21,6 +18,10 @@ struct MyCompare
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cout.tie(NULL);
+    cin.tie(NULL);
+
     std::vector<int> answer;
     std::priority_queue<int, std::vector<int>, MyCompare> pQue;
     int N;
@@ -44,8 +45,8 @@ int main()
 
             else
             {
-                 answer.push_back(pQue.top());
-                 pQue.pop();
+                answer.push_back(pQue.top());
+                pQue.pop();
             }
         }
     }
@@ -54,5 +55,6 @@ int main()
     {
         std::cout << answer[i] << "\n";
     }
-    
+
+    return 0;
 }
