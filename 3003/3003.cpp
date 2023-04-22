@@ -10,7 +10,7 @@ int main()
         std::cin >> Arr[i];
         Arr[i] = Chess[i] - Arr[i];
     }
-
+        
     for (int i = 0; i < 6; ++i)
     {
         std::cout << Arr[i];

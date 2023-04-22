@@ -27,6 +27,7 @@ int main()
         
         if (Sum < N)
             ++End;
+
         else if (Sum >= N)
             ++Start;
     

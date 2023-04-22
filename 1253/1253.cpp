@@ -1,15 +1,17 @@
-﻿// 1253.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
-
-#include <iostream>
+﻿#include <iostream>
 #include <algorithm>
 #include <vector>
+
+using namespace std;
 
 int main()
 {
     int N;
-    std::vector<long long> Arr;
-    std::vector<int> Asw;
+    std::vector<int> Arr;
+
+    ios_base::sync_with_stdio(false);
+    cout.tie(NULL);
+    cin.tie(NULL);
 
     std::cin >> N;
 
@@ -30,13 +32,12 @@ int main()
 
         while (Start < End)
         {
-            long long Sum = Arr[Start] + Arr[End];
+            int Sum = Arr[Start] + Arr[End];
 
             if (Sum == Arr[i])
             {
                 if (Start == i)
                     ++Start;
-
                 else if (End == i)
                     --End;
                 else
@@ -45,7 +46,6 @@ int main()
                     break;
                 }
             }
-
             else if (Sum > Arr[i])
                 --End;
             else if (Sum < Arr[i])
@@ -53,5 +53,7 @@ int main()
         }
     }
 
-    std::cout << Count;
+    std::cout << Count << "\n";
+
+    return 0;
 }
