@@ -12,11 +12,11 @@ int N, M, K;
 std::vector<std::vector<bool>> vecCheck;
 std::vector<std::vector<int>> vecFarm;
 
-bool BFS(int X, int Y)
+void BFS(int X, int Y)
 {
     std::queue<std::pair<int, int>> Myqueue;
-
     Myqueue.push(std::make_pair(X, Y));
+
     vecCheck[X][Y] = true;
 
     while (!Myqueue.empty())
@@ -24,7 +24,7 @@ bool BFS(int X, int Y)
         int CurX = Myqueue.front().first;
         int CurY = Myqueue.front().second;
         Myqueue.pop();
-
+        
         for (int i = 0; i < 4; ++i)
         {
             int MoveX = CurX + dx[i];
@@ -40,24 +40,19 @@ bool BFS(int X, int Y)
             }
         }
     }
-
-    return vecCheck[X][Y];
 }
 
 void CaseInit()
 {
-    vecCheck.resize(25);
+    vecCheck.resize(50);
+    vecFarm.resize(50);
     for (int i = 0; i < vecCheck.size(); ++i)
     {
-        vecCheck[i].resize(25, false);
-    }
-
-    vecFarm.resize(25);
-    for (int i = 0; i < vecFarm.size(); ++i)
-    {
-        vecFarm[i].resize(25, 0);
+        vecCheck[i].assign(vecCheck.size(), false);
+        vecFarm[i].assign(vecFarm.size(), 0);
     }
 }
+
 
 int main()
 {
@@ -70,25 +65,25 @@ int main()
     while (Count < CaseCount)
     {
         CaseInit();
-        Worm = 0;
-        std::cin >> N >> M >> K; 
+        Worm = 0; // 가로 세로
+        std::cin >> M >> N >> K;
 
-        std::vector<std::pair<int, int>> vecCoord;
-        
         for (int i = 0; i < K; ++i)
         {
             int X, Y;
             std::cin >> X >> Y;
-            vecCoord.push_back(std::make_pair(X, Y));
             vecFarm[Y][X] = 1;
         }
 
-        for (int i = 0; i < vecCoord.size(); ++i)
+        for (int i = 0; i < N; ++i)
         {
-            if (!vecCheck[vecCoord[i].first][vecCoord[i].second])
+            for (int j = 0; j < M; ++j)
             {
-                BFS(vecCoord[i].first, vecCoord[i].second);
-                ++Worm;
+                if (!vecCheck[i][j] && vecFarm[i][j] == 1)
+                {
+                    BFS(i, j);
+                    ++Worm;
+                }
             }
         }
 
@@ -96,7 +91,7 @@ int main()
         ++Count;
     }
 
-    for(int i = 0; i < vecCount.size(); ++i)
+    for (int i = 0; i < vecCount.size(); ++i)
         std::cout << vecCount[i] << "\n";
 
     return 0;
