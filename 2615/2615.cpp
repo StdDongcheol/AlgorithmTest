@@ -1,80 +1,107 @@
-﻿
-
-
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
-
 std::vector<std::vector<int>> vecBoard;
-
 int board[19][19] = {};
 bool Check[19][19] = {};
-
-int dx[4] = { 1, 0, -1, 1};
-int dy[4] = { 0, 1, 1, 1};
-
-int DFS(int Y, int X, int Dir, int Count, int Force)
+int dx[4] = { 1, 0, 1, 1};
+int dy[4] = { 0, 1, -1,  1};
+int CurX, CurY;
+int MoveX;
+int MoveY;
+void DFS(int Y, int X, int Dir, int Count, int Force)
 {
     Check[Y][X] = true;
 
-    int MoveX = X + dx[Dir];
-    int MoveY = Y + dy[Dir];
+    for (int i = 0; i < 4; ++i)
+    {
+        MoveX = X + dx[i];
+        MoveY = Y + dy[i];
 
-    if (MoveX >= 19 || MoveX < 0 || MoveY >= 19 || MoveY < 0)
-        return Count;
+        if (MoveX >= 19 || MoveX < 0 || MoveY >= 19 || MoveY < 0)
+            continue;
 
-    if (board[MoveY][MoveX] == Force && !Check[MoveY][MoveX])
-        Count = DFS(MoveY, MoveX, Dir, Count + 1, Force);
-    
+        if (board[MoveY][MoveX] == board[Y][X] 
+            && !Check[MoveY][MoveX])
+        {
+            // 가로의 경우
+            if (MoveY == Y)
+            {
+                if (Dir == 0)
+                    DFS(MoveY, MoveX, Dir, Count + 1, Force);
+                else
+                    DFS(MoveY, MoveX, 0, 2, Force);
+            }
+
+            // 세로의 경우
+            else if (MoveX == X)
+            {
+                if (Dir == 1)
+                    DFS(MoveY, MoveX, Dir, Count + 1, Force);
+                else
+                    DFS(MoveY, MoveX, 1, 2, Force);
+            }
+
+            // 위대각선의 경우
+            else if (Y - MoveY == 1 && MoveX - X == 1)
+            {
+                if (Dir == 2)
+                    DFS(MoveY, MoveX, Dir, Count + 1, Force);
+                else
+                    DFS(MoveY, MoveX, 2, 2, Force);
+            }
+
+            else
+            {
+                if (Dir == 3)
+                    DFS(MoveY, MoveX, Dir, Count + 1, Force);
+                else
+                    DFS(MoveY, MoveX, 3, 2, Force);
+            }
+        }
+    }
+
     Check[Y][X] = false;
 
     if (Count == 5)
     {
-        int MoveX = X + dx[Dir];
-        int MoveY = Y + dy[Dir];
+        if (Dir == 0)
+        {
+            if ((X > 5 && board[Y][X] == board[Y][X - 5]) ||
+                (X < 19 && board[Y][X] == board[Y][X + 1]))
+                return;
+        }
+        
+        else if (Dir == 1)
+        {
+            if ((Y > 5 && board[Y][X] == board[Y - 5][X]) ||
+                (Y < 19 && board[Y][X] == board[Y + 1][X]))
+                return;
+        }
+        
+        else if (Dir == 2)
+        {
+            if ((Y < 15 && X > 5 && board[Y][X] == board[Y + 5][X - 5]) ||
+                (Y > 1 && X < 19 && board[Y][X] == board[Y - 1][X + 1]))
+                return;
+        }
+        
+        else if (Dir == 3)
+        {
+            if ((Y > 5 && X > 5 && board[Y][X] == board[Y - 5][X - 5]) ||
+                (Y < 19 && X < 19 && board[Y][X] == board[Y + 1][X + 1]))
+                return;
+        }
 
-        if (MoveX >= 19 || MoveX < 0 || MoveY >= 19 || MoveY < 0)
-            return 0;
-
-        int ReverseMoveX = X - (dx[Dir] * 5);
-        int ReverseMoveY = Y - (dy[Dir] * 5);
-
-        if (board[MoveY][MoveX] == Force || board[ReverseMoveY][ReverseMoveX] == Force)
-            return 6;
-        else
-            return Count;
+        std::cout << board[Y][X] << "\n";
+        std::cout << CurY + 1 << " " << CurX + 1;
+        exit(0);
     }
 
-    return Count;
-}
-
-int DFSTail(int Y, int X, int Force)
-{
-    if (board[Y][X] != Force)
-        return 0;
-
-    for (int i = 0; i < 4; ++i)
-    {
-        if (5 == DFS(Y, X, i, 1, Force))
-            return 5;
-    }
-
-    return 0;
+    return;
 }
 
 int main()
 {
-    //vecBoard.resize(19);
-    //
-    //for(int i = 0; i < vecBoard.size(); ++i)
-    //    vecBoard[i].resize(19);
-
-    //for (int i = 0; i < vecBoard.size(); ++i)
-    //{
-    //    for (int j = 0; j < vecBoard[i].size(); ++j)
-    //    {
-    //        std::cin >> vecBoard[i][j];
-    //    }
-    //}
     for (int i = 0; i < 19; ++i)
     {
         for (int j = 0; j < 19; ++j)
@@ -83,48 +110,21 @@ int main()
         }
     }
 
-    bool BlackCheck = false;
-    bool WhiteCheck = false;
-    int X, Y;
+
     for (int i = 0; i < 19; ++i)
     {
         for (int j = 0; j < 19; ++j)
         {
-            if (DFSTail(i, j, 1) == 5)
+            if (!Check[i][j] && board[i][j] != 0)
             {
-                Y = i + 1;
-                X = j + 1;
-                BlackCheck = true;
-                break;
-            }
-
-            else if (DFSTail(i, j, 2) == 5)
-            {
-                Y = i + 1;
-                X = j + 1;
-                WhiteCheck = true;
-                break;
+                CurX = j;
+                CurY = i;
+                DFS(i, j, 0, 1, board[i][j]);
             }
         }
-
-        if (WhiteCheck || BlackCheck)
-            break;
     }
 
-    if (BlackCheck)
-    {
-        std::cout << "1" << "\n";
-        std::cout << Y << " " << X;
-    }
-    else if (WhiteCheck)
-    {
-        std::cout << "2" << "\n";
-        std::cout << Y << " " << X;
-    }
-    else
-    {
-        std::cout << "0";
-    }
-
+    std::cout << "0";
+    
     return 0;
 }
