@@ -8,7 +8,7 @@
 
 int main()
 {
-    long long Sum = 0;
+    int Sum = 0;
     int N;
     std::vector<int> vecNum;
     std::priority_queue<int, std::vector<int>, std::greater<int>> pque;
@@ -34,7 +34,7 @@ int main()
         int Data2 = pque.top();
         pque.pop();
 
-        Sum += (long long)(Data + Data2);
+        Sum += (Data + Data2);
         pque.push(Data + Data2);
     }
 
