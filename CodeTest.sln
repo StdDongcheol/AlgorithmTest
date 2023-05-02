@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.4.33205.214
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "11659", "11659\11659.vcxproj", "{98A68E64-8AB1-4008-9C1C-3312BCF45BFA}"
 EndProject
@@ -114,6 +114,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1495_Jungol", "1495_Jungol\1495_Jungol.vcxproj", "{A54A7C99-E417-431C-9644-C1F6EA720A8A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1002", "1002\1002.vcxproj", "{C4A1C8F7-335E-4732-B3F6-A985CDBD29C5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DailyEnergy", "DailyEnergy\DailyEnergy.vcxproj", "{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -571,6 +573,14 @@ Global
 		{C4A1C8F7-335E-4732-B3F6-A985CDBD29C5}.Release|x64.Build.0 = Release|x64
 		{C4A1C8F7-335E-4732-B3F6-A985CDBD29C5}.Release|x86.ActiveCfg = Release|Win32
 		{C4A1C8F7-335E-4732-B3F6-A985CDBD29C5}.Release|x86.Build.0 = Release|Win32
+		{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}.Debug|x64.ActiveCfg = Debug|x64
+		{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}.Debug|x64.Build.0 = Debug|x64
+		{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}.Debug|x86.ActiveCfg = Debug|Win32
+		{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}.Debug|x86.Build.0 = Debug|Win32
+		{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}.Release|x64.ActiveCfg = Release|x64
+		{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}.Release|x64.Build.0 = Release|x64
+		{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}.Release|x86.ActiveCfg = Release|Win32
+		{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
