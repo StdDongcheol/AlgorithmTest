@@ -117,6 +117,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1002", "1002\1002.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DailyEnergy", "DailyEnergy\DailyEnergy.vcxproj", "{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ElectronicStation", "ElectronicStation\ElectronicStation.vcxproj", "{33136F72-10FB-4858-9450-B35DDF3F112B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -581,6 +583,14 @@ Global
 		{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}.Release|x64.Build.0 = Release|x64
 		{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}.Release|x86.ActiveCfg = Release|Win32
 		{0C5865F2-1DA1-4F2B-8D2D-1EF01AB3F78E}.Release|x86.Build.0 = Release|Win32
+		{33136F72-10FB-4858-9450-B35DDF3F112B}.Debug|x64.ActiveCfg = Debug|x64
+		{33136F72-10FB-4858-9450-B35DDF3F112B}.Debug|x64.Build.0 = Debug|x64
+		{33136F72-10FB-4858-9450-B35DDF3F112B}.Debug|x86.ActiveCfg = Debug|Win32
+		{33136F72-10FB-4858-9450-B35DDF3F112B}.Debug|x86.Build.0 = Debug|Win32
+		{33136F72-10FB-4858-9450-B35DDF3F112B}.Release|x64.ActiveCfg = Release|x64
+		{33136F72-10FB-4858-9450-B35DDF3F112B}.Release|x64.Build.0 = Release|x64
+		{33136F72-10FB-4858-9450-B35DDF3F112B}.Release|x86.ActiveCfg = Release|Win32
+		{33136F72-10FB-4858-9450-B35DDF3F112B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
