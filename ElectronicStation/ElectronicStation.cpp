@@ -74,6 +74,8 @@ int solution(int n, vector<vector<int>> wires)
         Count2 = -1;
 
 
+
+
     }
 
     return answer;
