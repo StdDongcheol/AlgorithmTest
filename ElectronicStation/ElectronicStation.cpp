@@ -72,6 +72,8 @@ int solution(int n, vector<vector<int>> wires)
         std::fill(vecCheck.begin(), vecCheck.begin() + n + 1, false);
         Count1 = -1;
         Count2 = -1;
+
+
     }
 
     return answer;
