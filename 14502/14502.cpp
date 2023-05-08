@@ -3,23 +3,71 @@
 
 #include <iostream>
 #include <vector>
+#include <queue>
 
-int vecBoard[8][8] = {};
-bool vecCheck[8][8] = { false, }; 
+int vecBoard[9][9] = {};
+bool vecCheck[9][9] = { false, }; 
 std::vector<std::pair<int, int>> vecVirus;
 int Count = 0;
-int N, M;
+int N = 0; 
+int M = 0;
 
-int BFS(std::vector<std::pair<int, int>> vecPos)
+int dx[4] = {1, 0, -1, 0};
+int dy[4] = {0, 1, 0, -1};
+
+void BFS(std::vector<std::pair<int, int>> vecPos)
 {
     // 벽세우기
     for (std::pair<int, int> Coord : vecPos)
         vecBoard[Coord.first][Coord.second] = 1;
+    
+    std::queue<std::pair<int, int>> q;
+
+    for (int i = 0; i < vecVirus.size(); ++i)
+    {
+        q.push(std::make_pair(vecVirus[i].first, vecVirus[i].second));
+
+        vecCheck[vecVirus[i].first][vecVirus[i].second] = true;
+
+        while (!q.empty())
+        {
+            int VirusX = q.front().first;
+            int VirusY = q.front().second;
+            q.pop();
+
+            for (int j = 0; j < 4; ++j)
+            {
+                int NextX = VirusX + dx[j];
+                int NextY = VirusY + dy[j];
+
+                if ((NextX > 0 && NextX <= N) &&
+                    (NextY > 0 && NextY <= M))
+                {
+                    if (!vecCheck[NextX][NextY] && vecBoard[NextX][NextY] == 0)
+                    {
+                        vecCheck[NextX][NextY] = true;
+                        q.push(std::make_pair(NextX, NextY));
+                    }
+                }
+            }
+        }
+    }
 
 
+    int CurCount = 0;
+    for (int i = 1; i <= N; ++i)
+    {
+        for (int j = 1; j <= M; ++j)
+        {
+            if (vecBoard[i][j] == 0 && !vecCheck[i][j])
+                ++CurCount;
+        }
+    }
 
+    if (Count < CurCount)
+        Count = CurCount;
 
-
+    std::fill(vecCheck[0], vecCheck[0] + 81, false);
     // 벽치우기
     for (std::pair<int, int> Coord : vecPos)
         vecBoard[Coord.first][Coord.second] = 0;
@@ -29,7 +77,7 @@ void Comb(int start, int n, int depth, std::vector<std::pair<int, int>> vec, std
 {
     if (v.size() == depth)
     {
-
+        BFS(v);
         return;
     }
 
@@ -65,7 +113,5 @@ int main()
 
     Comb(-1, vecSpace.size(), 3, vecSpace, vecComb);
 
-
-
-    std::cout << "Hello World!\n";
+    std::cout << Count;
 }
