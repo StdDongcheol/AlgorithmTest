@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.4.33205.214
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "11659", "11659\11659.vcxproj", "{98A68E64-8AB1-4008-9C1C-3312BCF45BFA}"
 EndProject
@@ -132,6 +132,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EmergencyBoat", "EmergencyBoat\EmergencyBoat.vcxproj", "{548C658E-5817-4894-B1E3-4F070B1AD951}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "14502", "14502\14502.vcxproj", "{FF490C97-2117-4EC8-985E-A3EE6B7365C8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "15829", "15829\15829.vcxproj", "{1E4E18E3-D7ED-4A19-9DC2-C672AA297252}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PhoneNumbList", "PhoneNumbList\PhoneNumbList.vcxproj", "{18710A84-3D76-4C06-800E-728EC1A6C131}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -661,6 +665,22 @@ Global
 		{FF490C97-2117-4EC8-985E-A3EE6B7365C8}.Release|x64.Build.0 = Release|x64
 		{FF490C97-2117-4EC8-985E-A3EE6B7365C8}.Release|x86.ActiveCfg = Release|Win32
 		{FF490C97-2117-4EC8-985E-A3EE6B7365C8}.Release|x86.Build.0 = Release|Win32
+		{1E4E18E3-D7ED-4A19-9DC2-C672AA297252}.Debug|x64.ActiveCfg = Debug|x64
+		{1E4E18E3-D7ED-4A19-9DC2-C672AA297252}.Debug|x64.Build.0 = Debug|x64
+		{1E4E18E3-D7ED-4A19-9DC2-C672AA297252}.Debug|x86.ActiveCfg = Debug|Win32
+		{1E4E18E3-D7ED-4A19-9DC2-C672AA297252}.Debug|x86.Build.0 = Debug|Win32
+		{1E4E18E3-D7ED-4A19-9DC2-C672AA297252}.Release|x64.ActiveCfg = Release|x64
+		{1E4E18E3-D7ED-4A19-9DC2-C672AA297252}.Release|x64.Build.0 = Release|x64
+		{1E4E18E3-D7ED-4A19-9DC2-C672AA297252}.Release|x86.ActiveCfg = Release|Win32
+		{1E4E18E3-D7ED-4A19-9DC2-C672AA297252}.Release|x86.Build.0 = Release|Win32
+		{18710A84-3D76-4C06-800E-728EC1A6C131}.Debug|x64.ActiveCfg = Debug|x64
+		{18710A84-3D76-4C06-800E-728EC1A6C131}.Debug|x64.Build.0 = Debug|x64
+		{18710A84-3D76-4C06-800E-728EC1A6C131}.Debug|x86.ActiveCfg = Debug|Win32
+		{18710A84-3D76-4C06-800E-728EC1A6C131}.Debug|x86.Build.0 = Debug|Win32
+		{18710A84-3D76-4C06-800E-728EC1A6C131}.Release|x64.ActiveCfg = Release|x64
+		{18710A84-3D76-4C06-800E-728EC1A6C131}.Release|x64.Build.0 = Release|x64
+		{18710A84-3D76-4C06-800E-728EC1A6C131}.Release|x86.ActiveCfg = Release|Win32
+		{18710A84-3D76-4C06-800E-728EC1A6C131}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
