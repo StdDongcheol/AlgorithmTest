@@ -39,7 +39,7 @@ vector<int> solution(vector<string> genres, vector<int> plays)
 
     auto iter = mapSongs.begin();
     auto iterEnd = mapSongs.end();
-    
+
     for (; iter != iterEnd; ++iter)
         std::sort(iter->second.rbegin(), iter->second.rend());
 
@@ -48,7 +48,7 @@ vector<int> solution(vector<string> genres, vector<int> plays)
     for (int i = 0; i < vecChart.size(); ++i)
     {
         string strChart = vecChart[i].second;
-        
+
         if (mapSongs[strChart].size() == 1)
             answer.push_back(mapSongs[strChart][0].second);
         else
@@ -57,13 +57,13 @@ vector<int> solution(vector<string> genres, vector<int> plays)
             {
                 if (mapSongs[strChart][0].second > mapSongs[strChart][1].second)
                 {
-                    answer.push_back(mapSongs[strChart][0].second);
                     answer.push_back(mapSongs[strChart][1].second);
+                    answer.push_back(mapSongs[strChart][0].second);
                 }
                 else
                 {
-                    answer.push_back(mapSongs[strChart][1].second);
                     answer.push_back(mapSongs[strChart][0].second);
+                    answer.push_back(mapSongs[strChart][1].second);
                 }
             }
 
@@ -73,13 +73,7 @@ vector<int> solution(vector<string> genres, vector<int> plays)
                 answer.push_back(mapSongs[strChart][1].second);
             }
         }
-
     }
 
     return answer;
-}
-
-int main()
-{
-    solution({ "mislav", "stanko", "mislav", "ana" }, {"stanko", "mislav", "ana"});
 }
