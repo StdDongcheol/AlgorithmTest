@@ -1,26 +1,39 @@
-﻿// _TestCase.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
-
-#include <iostream>
-#include <string>
+﻿#include <string>
 #include <vector>
 
+using namespace std;
 
-// 포인터 변수의 경우는 ->나 *를 써서 접근해야 하지만,
-// 레퍼런스 변수는 일반 변수처럼 사용할수 있지.
-void Func(int& str)
+vector<int> solution(vector<string> genres, vector<int> plays)
 {
-    int* a = new int;
+    vector<int> answer;
+    std::vector<std::pair<int, string>> vecChart;
+    std::map<string, int> mapPlayChart;
+    std::map<string, std::vector<std::pair<int, int>>> mapSongs;
 
-    return;
-}
+    for (int i = 0; i < genres.size(); ++i)
+    {
+        string strGenre = genres[i];
+        int iPlayCount = plays[i];
 
-void Func1(int* str)
-{
-    int* a = new int;
+        auto iter = mapPlayChart.find(strGenre);
 
-    return;
-}
+        if (iter != mapPlayChart.end())
+            iter->second += iPlayCount;
+        else
+            mapPlayChart.insert(make_pair(strGenre, iPlayCount));
+
+        mapSongs[strGenre].push_back(make_pair(iPlayCount, i));
+    }
+
+    {
+        auto iter = mapPlayChart.begin();
+        auto iterEnd = mapPlayChart.end();
+
+        for (; iter != iterEnd; ++iter)
+            vecChart.push_back(make_pair(iter->second, iter->first));
+
+        std::sort(vecChart.rbegin(), vecChart.rend());
+    }
 
 int n = 5;
 int k = 3;
