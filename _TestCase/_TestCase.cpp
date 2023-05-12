@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 
 // 포인터 변수의 경우는 ->나 *를 써서 접근해야 하지만,
@@ -21,6 +22,27 @@ void Func1(int* str)
     return;
 }
 
+int n = 5;
+int k = 3;
+
+void combi(int Start, std::vector<int> vec, std::vector<int>& vecTarget)
+{
+    if (vec.size() == k)
+    {
+        for (int i = 0; i < vec.size(); ++i)
+            std::cout << vec[i] << " ";
+        std::cout << "\n";
+        return;
+    }
+
+    for (int i = Start + 1; i < n; ++i)
+    {
+        vec.push_back(vecTarget[i]);
+        combi(i, vec, vecTarget);
+        vec.pop_back();
+    }
+}
+
 int main()
 {
     std::string strSrc = "블끼얏호우~!";
@@ -31,5 +53,10 @@ int main()
 
     char* c = new char[40];
     
+    std::vector<int> vec;
+    std::vector<int> vecTarget = { 5, 6, 7, 8, 9 };
+
+    combi(-1, vec, vecTarget);
+
     return 0;
 }
