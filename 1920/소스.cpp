@@ -2,10 +2,11 @@
 #include <vector>
 #include <algorithm>
 
-
 int arrN[100000] = {};
 int arrM[100000] = {};
+
 std::vector<int> vecAnswer;
+
 int main()
 {
 	int N, M;
@@ -27,7 +28,7 @@ int main()
 		int CurNumb = arrM[i];
 		
 		bool Check = false;
-		while (Start < End)
+		while (Start <= End)
 		{
 			int Mid = (Start + End) / 2;
 
@@ -50,6 +51,9 @@ int main()
 		if (!Check)
 			vecAnswer.push_back(0);
 	}
+	
+	for (int i = 0; i < vecAnswer.size(); ++i)
+		std::cout << vecAnswer[i] << "\n";
 
 	return 0;
 }
