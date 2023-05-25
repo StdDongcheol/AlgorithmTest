@@ -5,65 +5,50 @@
 #include <vector>
 #include <queue>
 
-std::vector<std::vector<int>> vecTree;
-std::vector<int> vecCheck;
-std::vector<bool> vecSearchCheck;
+std::vector<std::vector<std::pair<int, int>>> vecTree;
+std::vector<int> vecLength;
+std::vector<bool> vecCheck;
 int Length = 0;
 
-
-void BFS(int Index)
+void DFS(int _V, int _value)
 {
-    std::queue<int> queue;
-
-    queue.push(Index);
-    while (!queue.empty())
+    vecCheck[_V] = true;
+    
+    for (int i = 0; i < vecTree[_V].size(); ++i)
     {
-        int V = queue.front();
-        queue.pop();
-        vecSearchCheck[V] = true;
+        int NextV = vecTree[_V][i].first;
 
-        bool Check = false;
-        for (int i = 0; i < vecTree[V].size(); ++i)
-        {
-            if (vecTree[V][i] == -1)
-                continue;
+        if (vecCheck[NextV])
+            continue;
 
-            // Cost
-            int NextCost = vecTree[V][i];
+        _value += vecTree[_V][i].second;
+        vecLength[NextV]
+        DFS(NextV, _value);
 
-            if (vecCheck[i] == 0 && !vecSearchCheck[i])
-            {
-                Check = true;
-                vecCheck[i] = vecCheck[V] + NextCost;
-                queue.push(i);
-            }
-        }
-
-        // 단말노드.
-        if (!Check)
-        {
-            if (Length < vecCheck[V])
-                Length = vecCheck[V];
-        }
+        _value -= vecTree[_V][i].second;
     }
 
-}
+    if (_value > Length)
+        Length = _value;
 
+    vecCheck[_V] = false;
+
+    return;
+}
 
 int main()
 {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(NULL);
+    std::cout.tie(NULL);
     int V;
     int u, v, cost;
 
     std::cin >> V;
 
     vecTree.resize(V + 1);
+    vecLength.resize(V + 1, 0);
     vecCheck.resize(V + 1, 0);
-    vecSearchCheck.resize(V + 1, 0);
-    for (int i = 1; i <= V; ++i)
-    {
-        vecTree[i].resize(V + 1, -1);
-    }
 
     for (int i = 1; i <= V; ++i)
     {
@@ -76,11 +61,11 @@ int main()
                 break;
             
             std::cin >> cost;
-            vecTree[u][v] = cost;
+            vecTree[u].push_back(std::make_pair(v, cost));
         }
     }
 
-    BFS(1);
+    DFS(1, 0);
 
-    std::cout << "Hello World!\n";
+    std::cout << Length;
 }
