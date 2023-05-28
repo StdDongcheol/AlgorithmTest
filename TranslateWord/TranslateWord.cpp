@@ -4,83 +4,59 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
-string srcBegin;
-string srcTarget;
-vector<int> vecCount;
-vector<bool> vecCheck;
-int MoveCount = 0;
+bool arrCheck[50];
+int Result = 9999;
 
-int DFS(string curStr, string targetStr, vector<string>& vecWords)
+void DFS(std::string strSrc, std::string strTarget, 
+    int _Count, std::vector<std::string>& vecWords)
 {
-    size_t strSize = curStr.length();
-    int count = 0;
-
-    if (curStr == srcTarget)
+    if (strSrc == strTarget)
     {
-        vecCount.push_back(MoveCount);
-        return 0;
+        if (_Count < Result)
+            Result = _Count;
+        return;
     }
-
-    for (int i = 0; i < strSize; ++i)
-    {
-        if (curStr[i] != targetStr[i])
-            ++count;
-    }
-
-    if (count >= 2)
-        return 0;
 
     for (int i = 0; i < vecWords.size(); ++i)
     {
-        count = 0;
-        int index = 0;
+        if (arrCheck[i])
+            continue;
 
-        for (int j = 0; j < vecWords[i].length(); ++j)
+        std::string str = vecWords[i];
+        int diffCount = 0;
+
+        for (int j = 0; j < str.length(); ++j)
         {
-            if (vecWords[i][j] != targetStr[j])
-            {
-                ++count;
-                index = j;
-            }
+            if (strSrc[j] != str[j])
+                ++diffCount;
         }
 
-        if (count == 1 && vecWords[i][index] != targetStr[index])
+        if (diffCount == 1)
         {
-            if (!vecCheck[i])
-            {
-                ++MoveCount;
-                vecCheck[i] = true;
-                DFS(targetStr, vecWords[i], vecWords);
-                vecCheck[i] = false;
-                --MoveCount;
-            }
+            arrCheck[i] = true;
+            DFS(str, strTarget, _Count + 1, vecWords);
+            arrCheck[i] = false;
         }
     }
-
-    return MoveCount;
 }
 
 int solution(string begin, string target, vector<string> words)
 {
     int answer = 0;
-    vecCheck.resize(words.size(), false);
-    srcBegin = begin;
-    srcTarget = target;
 
-    for (int i = 0; i < words.size(); ++i)
-    {
-        DFS(begin, words[i], words);
-        std::fill(vecCheck.begin(), vecCheck.end(), false);
-    }
+    DFS(begin, target, 0, words);
     
-    if (vecCount.empty())
+    if (Result == 9999)
         return 0;
 
-    return *std::min_element(vecCount.begin(), vecCount.end());
+    else
+    {
+        answer = Result;
+        return answer;
+    }
 }
 
 int main()
