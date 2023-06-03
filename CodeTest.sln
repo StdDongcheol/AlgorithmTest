@@ -217,6 +217,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DoublePriorityQueue", "Doub
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PowerOfNightWork", "PowerOfNightWork\PowerOfNightWork.vcxproj", "{8B03FA13-1881-4588-BB95-91FAA40AEF4B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2563", "2563\2563.vcxproj", "{67DAA2A6-52CF-4D77-9D6C-0A3E132A6D9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1073,6 +1075,14 @@ Global
 		{8B03FA13-1881-4588-BB95-91FAA40AEF4B}.Release|x64.Build.0 = Release|x64
 		{8B03FA13-1881-4588-BB95-91FAA40AEF4B}.Release|x86.ActiveCfg = Release|Win32
 		{8B03FA13-1881-4588-BB95-91FAA40AEF4B}.Release|x86.Build.0 = Release|Win32
+		{67DAA2A6-52CF-4D77-9D6C-0A3E132A6D9D}.Debug|x64.ActiveCfg = Debug|x64
+		{67DAA2A6-52CF-4D77-9D6C-0A3E132A6D9D}.Debug|x64.Build.0 = Debug|x64
+		{67DAA2A6-52CF-4D77-9D6C-0A3E132A6D9D}.Debug|x86.ActiveCfg = Debug|Win32
+		{67DAA2A6-52CF-4D77-9D6C-0A3E132A6D9D}.Debug|x86.Build.0 = Debug|Win32
+		{67DAA2A6-52CF-4D77-9D6C-0A3E132A6D9D}.Release|x64.ActiveCfg = Release|x64
+		{67DAA2A6-52CF-4D77-9D6C-0A3E132A6D9D}.Release|x64.Build.0 = Release|x64
+		{67DAA2A6-52CF-4D77-9D6C-0A3E132A6D9D}.Release|x86.ActiveCfg = Release|Win32
+		{67DAA2A6-52CF-4D77-9D6C-0A3E132A6D9D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
