@@ -1,75 +1,69 @@
-﻿#include <string>
+﻿#include <iostream>
 #include <vector>
+#include <string>
+#include <algorithm>
 
-using namespace std;
+// 바이트패딩
 
-vector<int> solution(vector<string> genres, vector<int> plays)
-{
-    vector<int> answer;
-    std::vector<std::pair<int, string>> vecChart;
-    std::map<string, int> mapPlayChart;
-    std::map<string, std::vector<std::pair<int, int>>> mapSongs;
+// 패딩기준은 항상 제일 큰 타입의 사이즈를 따라간다.
+// "가상함수포인터" 도 예외없이 제일 큰타입의 사이즈로 동일하게 따라감.
 
-    for (int i = 0; i < genres.size(); ++i)
-    {
-        string strGenre = genres[i];
-        int iPlayCount = plays[i];
+// 32bit나 64bit나 가상함수 "포인터"기 때문에, 사이즈 역시 동일하게 따라감.
 
-        auto iter = mapPlayChart.find(strGenre);
+// 그러나 타입 기준이 최우선사항임.
+// 1번 우선순위 제일큰타입(ex: doubleType)
+// 2번 우선순위 운영체제 bit
 
-        if (iter != mapPlayChart.end())
-            iter->second += iPlayCount;
-        else
-            mapPlayChart.insert(make_pair(strGenre, iPlayCount));
+//class A
+//{
+//    int i;          // 4
+//    int ii;         // 4
+//    double d;       // 8
+//    int _3c;         // 1
+//    char _c;         // 1
+//    char _2c;         // 1
+//    //char c;         // 1
+//    //char cc;         // 1
+//    //char ccc;         // 1
+//    //char cccc;         // 1
+//    //int iii;           // 4
+//    
+//    virtual void pirnt();   // 8
+//};
+//
+//class B
+//{
+//    int* m_iInt;
+//
+//    virtual void pirnt();
+//};
 
-        mapSongs[strGenre].push_back(make_pair(iPlayCount, i));
-    }
+// 10826.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
+//
 
-    {
-        auto iter = mapPlayChart.begin();
-        auto iterEnd = mapPlayChart.end();
 
-        for (; iter != iterEnd; ++iter)
-            vecChart.push_back(make_pair(iter->second, iter->first));
-
-        std::sort(vecChart.rbegin(), vecChart.rend());
-    }
-
-int n = 5;
-int k = 3;
-
-void combi(int Start, std::vector<int> vec, std::vector<int>& vecTarget)
-{
-    if (vec.size() == k)
-    {
-        for (int i = 0; i < vec.size(); ++i)
-            std::cout << vec[i] << " ";
-        std::cout << "\n";
-        return;
-    }
-
-    for (int i = Start + 1; i < n; ++i)
-    {
-        vec.push_back(vecTarget[i]);
-        combi(i, vec, vecTarget);
-        vec.pop_back();
-    }
-}
+unsigned long long arr[10001] = { 0, 1 };
 
 int main()
 {
-    std::string strSrc = "블끼얏호우~!";
-    
-    std::string& strRef = strSrc;
-    
-    std::string strSrc2 = "돈스탑더뮤직~~!";
+    int  N;
 
-    char* c = new char[40];
-    
-    std::vector<int> vec;
-    std::vector<int> vecTarget = { 5, 6, 7, 8, 9 };
+    std::cin >> N;
+    int Count = 1;
 
-    combi(-1, vec, vecTarget);
+    if (N == 0)
+    {
+        std::cout << 0;
+        return 0;
+    }
+
+    while (N != Count)
+    {
+        arr[Count + 1] = arr[Count] + arr[Count - 1];
+        ++Count;
+    }
+
+    std::cout << arr[Count];
 
     return 0;
 }
