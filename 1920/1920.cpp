@@ -5,66 +5,52 @@
 #include <algorithm>
 #include <vector>
 
+int arrN[100000];
+int arrM[100000];
+
 int main()
 {
 	int N, M;
-	std::vector<int> vecN;
-	std::vector<int> vecM;
 
 	std::cin >> N;
-	vecN.resize(N);
+	for (int i = 0; i < N; ++i) 
+		std::cin >> arrN[i];
 
-	for (int i = 0; i < N; ++i)
-	{
-		std::cin >> vecN[i];
-	}
-	
 	std::cin >> M;
-	vecM.resize(M);
+	for (int i = 0; i < M; ++i)
+		std::cin >> arrM[i];
+
+	std::sort(arrN, arrN + N);
 
 	for (int i = 0; i < M; ++i)
 	{
-		std::cin >> vecM[i];
-	}
-
-	std::sort(vecN.begin(), vecN.end());
-
-	// vecN에서 vecM찾기
-	for (int i = 0; i < M; ++i)
-	{
-		int Check = false;
 		int Start = 0;
-		int End = vecN.size() - 1;
-		int TargetValue = vecM[i];
+		int End = N - 1;
 
+		bool Check = false;
 		while (Start <= End)
 		{
-			int Mid = (Start + End) / 2;
-			int MidValue = vecN[Mid];
-
-			if (TargetValue == MidValue)
+			int Middle = (Start + End) / 2;
+			if (arrN[Middle] == arrM[i])
 			{
 				Check = true;
 				break;
 			}
-
-			// Target이 더 크다면
-			else if (TargetValue > vecN[Mid])
+			else if (arrN[Middle] < arrM[i])
 			{
-				Start = Mid + 1;
+				Start = Middle + 1;
 			}
-
-			// Target이 작다면
-			else if (TargetValue < vecN[Mid])
+			else if (arrN[Middle] > arrM[i])
 			{
-				End = Mid - 1;
+				End = Middle - 1;
 			}
 		}
 
 		if (Check)
-			std::cout << 1 << "\n";
+			std::cout << 1 << '\n';
 		else
-			std::cout << 0 << "\n";
+			std::cout << 0 << '\n';
 	}
 
+	return 0;
 }
