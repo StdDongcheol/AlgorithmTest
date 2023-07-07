@@ -44,26 +44,36 @@
 
 unsigned long long arr[10001] = { 0, 1 };
 
+class Animal
+{
+public:
+	void Speak() {};
+};
+
+class Lion : public Animal
+{
+public:
+	//void Speak() { int c = 0; };
+};
+
+class Tiger : public Animal
+{
+public:
+	 //void Speak() { int b = 0; };
+};
+
+class Liger : public Tiger, public Lion
+{
+public:
+	virtual void Speak()
+	{
+		int a = 0;
+	}
+};
+
 int main()
 {
-    int  N;
+	Liger L;
 
-    std::cin >> N;
-    int Count = 1;
-
-    if (N == 0)
-    {
-        std::cout << 0;
-        return 0;
-    }
-
-    while (N != Count)
-    {
-        arr[Count + 1] = arr[Count] + arr[Count - 1];
-        ++Count;
-    }
-
-    std::cout << arr[Count];
-
-    return 0;
+	L.Speak();
 }

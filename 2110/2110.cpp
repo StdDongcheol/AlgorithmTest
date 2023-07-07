@@ -9,29 +9,33 @@ int arrN[200000];
 
 int main()
 {
-	int N, M;
-	int MaxLength = 0;
+	int N = 0, M = 0;
+	int Start = 0, End = 0;
+	int MaxLength = 2000000000;
 	std::cin >> N >> M;
 
 	for (int i = 0; i < N; ++i)
+	{
 		std::cin >> arrN[i];
+	}
 
 	std::sort(arrN, arrN + N);
-
-	int Start = 1;
-	int End = arrN[N - 1] - arrN[0];
 	
+	Start = arrN[0];
+	End = arrN[N - 1] - arrN[0];
+
 	while (Start <= End)
 	{
 		int Middle = (Start + End) / 2;
-		int StartIdx = arrN[0];
+		int StartVal = arrN[0];
 		int Count = 1;
 
 		for (int i = 1; i < N; ++i)
 		{
-			if (arrN[i] - StartIdx >= Middle)
+			int Dist = arrN[i] - StartVal;
+			if (Dist >= Middle)
 			{
-				StartIdx = arrN[i];
+				StartVal = arrN[i];
 				++Count;
 			}
 		}
@@ -41,12 +45,11 @@ int main()
 			MaxLength = std::max(MaxLength, Middle);
 			Start = Middle + 1;
 		}
-
-		else
+		else if (Count < M)
+		{
 			End = Middle - 1;
+		}
 	}
 
 	std::cout << MaxLength;
-
-	return 0;
 }
