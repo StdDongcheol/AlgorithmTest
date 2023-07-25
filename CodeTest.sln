@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.4.33205.214
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "11659", "11659\11659.vcxproj", "{98A68E64-8AB1-4008-9C1C-3312BCF45BFA}"
 EndProject
@@ -334,6 +334,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "11723", "11723\11723.vcxproj", "{EBEC1A34-60DC-45A2-9399-C5B583F7A6A9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "15649", "15649\15649.vcxproj", "{860793AE-BC1C-47DE-97ED-6C263E3E5362}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FindKimInSeoul", "FindKimInSeoul\FindKimInSeoul.vcxproj", "{69CC35D2-23EC-4BE1-9926-D64D9CAEECC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1671,6 +1673,14 @@ Global
 		{860793AE-BC1C-47DE-97ED-6C263E3E5362}.Release|x64.Build.0 = Release|x64
 		{860793AE-BC1C-47DE-97ED-6C263E3E5362}.Release|x86.ActiveCfg = Release|Win32
 		{860793AE-BC1C-47DE-97ED-6C263E3E5362}.Release|x86.Build.0 = Release|Win32
+		{69CC35D2-23EC-4BE1-9926-D64D9CAEECC5}.Debug|x64.ActiveCfg = Debug|x64
+		{69CC35D2-23EC-4BE1-9926-D64D9CAEECC5}.Debug|x64.Build.0 = Debug|x64
+		{69CC35D2-23EC-4BE1-9926-D64D9CAEECC5}.Debug|x86.ActiveCfg = Debug|Win32
+		{69CC35D2-23EC-4BE1-9926-D64D9CAEECC5}.Debug|x86.Build.0 = Debug|Win32
+		{69CC35D2-23EC-4BE1-9926-D64D9CAEECC5}.Release|x64.ActiveCfg = Release|x64
+		{69CC35D2-23EC-4BE1-9926-D64D9CAEECC5}.Release|x64.Build.0 = Release|x64
+		{69CC35D2-23EC-4BE1-9926-D64D9CAEECC5}.Release|x86.ActiveCfg = Release|Win32
+		{69CC35D2-23EC-4BE1-9926-D64D9CAEECC5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
