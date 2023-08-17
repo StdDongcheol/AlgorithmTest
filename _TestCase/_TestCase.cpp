@@ -1,11 +1,4 @@
-﻿#include <iostream>
-#include <vector>
-#include <string>
-#include <deque>
-#include <queue>
-#include <algorithm>
-#include <cctype>
-
+﻿
 // 바이트패딩
 
 // 패딩기준은 항상 제일 큰 타입의 사이즈를 따라간다.
@@ -44,6 +37,7 @@
 // 10826.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
 //
 
+#include <iostream>
 #include <string>
 #include <vector>
 #include <queue>
@@ -59,7 +53,7 @@ std::vector<bool> vecCheck;
 
 int solution(int n, int r, int c)
 {
-	int answer = 0;
+	int answer = 0;e
 	// 현재 위치한 행의 경우, 가질수 있는 r,c의 최대값은 행 - 1
 	// 대각선으로 그었을떄, 3번째 행의 경우, 3,1 ,2,2 1,3 까지 배치.
 	// 이건 중간대각선까지만 적용됨. N번째 넘어가면 역계산 필요.
@@ -70,7 +64,6 @@ int solution(int n, int r, int c)
 	// 지그재그의 경우, 등차수열로 현재 N행까지의 요소갯수를 알수 있음.
 	// 만약 N행 요소의 값을 구하려한다면
 	// 최소 N - 1행 요소값 이상이라는 말이다.
-
 
 	if (CurN > n)
 	{
@@ -118,6 +111,6 @@ int main()
 
 	multimap<int, int> mm;
 
-	solution(5, 3, 2);
-	solution(6, 5, 4);
+	std::cout << solution(5, 3, 2) << std::endl;
+	std::cout << solution(6, 5, 4) << std::endl;
 }
