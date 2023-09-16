@@ -2,19 +2,75 @@
 //
 
 #include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+
+int N, M;
+std::vector<std::vector<int>> vecNode;
+std::vector<int> vecCount;
+std::vector<bool> vecCheck;
+
+void BFS(int _Index)
+{
+    std::queue<int> q;
+
+    vecCheck[_Index] = true;
+    q.push(_Index);
+
+    while (!q.empty())
+    {
+        int CurIndex = q.front();
+        q.pop();
+
+        for (int i = 0; i < vecNode[CurIndex].size(); ++i)
+        {
+            int NextNode = vecNode[CurIndex][i];
+            if (vecCheck[NextNode] == false)
+            {
+                vecCheck[NextNode] = true;
+                ++vecCount[NextNode];
+                q.push(NextNode);
+            }
+        }
+    }
+    return;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::cin >> N >> M;
+    vecNode.resize(N + 1);
+    vecCount.resize(N + 1);
+    vecCheck.resize(N + 1);
+
+    for (int i = 0; i < M; ++i)
+    {
+        int U, V;
+        std::cin >> U >> V;
+
+        vecNode[U].push_back(V);
+    }
+
+    std::vector<int> vecLarge;
+
+    for (int i = 0; i < N; ++i)
+    {
+        BFS(i + 1);
+
+        std::fill(vecCheck.begin(), vecCheck.end(), false);
+    }
+
+    int maxValue = *std::max_element(vecCount.begin(), vecCount.end());
+
+    for (int i = 0; i < vecCount.size(); ++i)
+    {
+        if (vecCount[i] == maxValue)
+        {
+            std::cout << i << " ";
+        }
+    }
+
+
+    return 0;
 }
-
-// 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
-// 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
-
-// 시작을 위한 팁: 
-//   1. [솔루션 탐색기] 창을 사용하여 파일을 추가/관리합니다.
-//   2. [팀 탐색기] 창을 사용하여 소스 제어에 연결합니다.
-//   3. [출력] 창을 사용하여 빌드 출력 및 기타 메시지를 확인합니다.
-//   4. [오류 목록] 창을 사용하여 오류를 봅니다.
-//   5. [프로젝트] > [새 항목 추가]로 이동하여 새 코드 파일을 만들거나, [프로젝트] > [기존 항목 추가]로 이동하여 기존 코드 파일을 프로젝트에 추가합니다.
-//   6. 나중에 이 프로젝트를 다시 열려면 [파일] > [열기] > [프로젝트]로 이동하고 .sln 파일을 선택합니다.
