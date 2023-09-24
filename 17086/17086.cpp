@@ -4,12 +4,14 @@
 #include <iostream>
 #include <queue>
 
+#define SHARK_POS -9999999
+
 int N, M;
 int arr[50][50];
 bool check[50][50];
 
-int dx[8] = {1, 0, -1, 0, 1, 1, -1, -1};
-int dy[8] = {0, 1, 0, -1, 1, -1, 1, -1};
+int dx[8] = { 1, 0, -1, 0, 1, 1, -1, -1 };
+int dy[8] = { 0, 1, 0, -1, 1, -1, 1, -1 };
 
 void BFS(int _x, int _y)
 {
@@ -29,7 +31,7 @@ void BFS(int _x, int _y)
 			int NextX = CurX + dx[i];
 			int NextY = CurY + dy[i];
 
-			if (NextX < M && NextX >= 0 && NextY < N && NextY >= 0 && check[NextY][NextX] == false)
+			if (NextX < M && NextX >= 0 && NextY < N && NextY >= 0 && check[NextY][NextX] == false && arr[NextY][NextX] != SHARK_POS)
 			{
 				check[NextY][NextX] = true;
 				arr[NextY][NextX] = std::min(arr[NextY][NextX], arr[CurY][CurX] + 1);
@@ -43,24 +45,28 @@ int main()
 {
 	std::cin >> N >> M;
 
-	std::queue<std::pair<int, int>> q;
 	for (int i = 0; i < N; ++i)
 	{
 		for (int j = 0; j < M; ++j)
 		{
 			std::cin >> arr[i][j];
 			if (arr[i][j] == 1)
-				q.push({ i, j });
+				arr[i][j] = SHARK_POS;
 			else
 				arr[i][j] = 99999999;
 		}
 	}
-	
-	while (!q.empty())
+
+	for (int i = 0; i < N; ++i)
 	{
-		std::fill(check[0], check[0] + 5000, false);
-		BFS(q.front().first, q.front().second);
-		q.pop();
+		for (int j = 0; j < M; ++j)
+		{
+			if (SHARK_POS == arr[i][j])
+			{
+				std::fill(check[0], check[0] + 2500, false);
+				BFS(j, i);
+			}
+		}
 	}
 
 	int maxVal = 0;
