@@ -5,32 +5,23 @@
 
 int main()
 {
-	int N;
-	int NextX;
-	int NextX2;
-	int Number;
+	int N, NextX, NextX2, NextNumb, Number;
 	int Count = 0;
 	std::cin >> N;
 	Number = N;
 
-	NextX = N % 10;	// 6
-	N /= 10;
-	NextX2 = N % 10;	// 2
-	int NextX3 = NextX + NextX2;	// 2
-	++Count;
-	int newNumber = (NextX * 10) + NextX3;
-	
-	
-	while (Number != newNumber)
+	do
 	{
-		NextX3 = NextX;
-		NextX = newNumber % 10;	// 8
-		newNumber /= 10;
-		NextX2 = newNumber % 10;	// 6
-		newNumber = NextX + NextX2;	// 6 + 8
-		++Count;
-	}
+		NextX2 = Number % 10; // 6
+		Number /= 10;
+		NextX = Number % 10; // 2
 
+		NextNumb = NextX + NextX2;	// 8
+		Number = NextX2 * 10 + ((NextX + NextX2) % 10);
+
+		++Count;
+	} while (Number != N);
+	
 	std::cout << Count;
 
 	return 0;
