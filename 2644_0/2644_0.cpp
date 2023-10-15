@@ -28,13 +28,12 @@ int BFS(int _index)
 
 			if (vecCheck[NextNode] == -1)
 			{
-				{
-					vecCheck[NextNode] = vecCheck[CurIndex] + 1;
-					q.push(NextNode);
+				vecCheck[NextNode] = vecCheck[CurIndex] + 1;
+				q.push(NextNode);
 
-					if (NextNode == A2)
-						return vecCheck[NextNode];
-				}
+				if (NextNode == A2)
+					return vecCheck[NextNode];
+			
 			}
 		}
 	}
