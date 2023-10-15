@@ -25,7 +25,7 @@ int main()
 		int EnterTime = vec[i].first;
 		if (CurTime < EnterTime)
 		{
-			CurTime = vec[i].first + vec[i].second;
+			CurTime = EnterTime + vec[i].second;
 		}
 		else
 		{
