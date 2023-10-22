@@ -9,45 +9,40 @@
 using namespace std;
 
 std::vector<std::vector<char>> vecMap;
-
+std::string resultStr;
 // 1:d  2:l  3:r  4:u
 int dx[4] = { 0, -1, 1 , 0 };
 int dy[4] = { 1, 0, 0, -1 };
+char arr[4] = {'d', 'l', 'r', 'u'};
 
-void BFS(std::vector<string>& _vecStr,
+void DFS(std::string _Str, int _CurCount, 
     int _n, int _m, int _x, int _y, int _r, int _c, int _k)
 {
-    std::queue<std::pair<string, std::pair<int, int>>> q;
-
-    q.push({ "", {_x, _y} });
-
-    while (!q.empty())
+    if (resultStr.empty())
     {
-        string CurStr = q.front().first;
-        int CurX = q.front().second.first;
-        int CurY = q.front().second.second;
-        q.pop();
+        string CurStr = _Str;
+        int CurX = _x;
+        int CurY = _y;
 
-        if (CurStr.length() == _k)
+        if (_CurCount == _k)
         {
             if (vecMap[CurY][CurX] == 'E')
             {
-                _vecStr.push_back(CurStr);
+                resultStr = _Str;
+                return;
             }
-            continue;
         }
 
         int Dist = abs(CurX - _c) + abs(CurY - _r);
 
-
         if (CurStr.length() + Dist > _k)
-            continue;
+            return;
         else
         {
             int MoveCount = abs(_k - (int)CurStr.length() - Dist);
 
             if (MoveCount % 2 != 0)
-                continue;
+                return;
         }
 
         for (int i = 0; i < 4; ++i)
@@ -56,21 +51,9 @@ void BFS(std::vector<string>& _vecStr,
             int NextY = CurY + dy[i];
             if (1 <= NextX && NextX <= _m && 1 <= NextY && NextY <= _n)
             {
-                switch (i)
-                {
-                case 0:
-                    q.push({ CurStr + 'd', {NextX, NextY} });
-                    break;
-                case 1:
-                    q.push({ CurStr + 'l', {NextX, NextY} });
-                    break;
-                case 2:
-                    q.push({ CurStr + 'r', {NextX, NextY} });
-                    break;
-                case 3:
-                    q.push({ CurStr + 'u', {NextX, NextY} });
-                    break;
-                }
+                CurStr.push_back(arr[i]);
+                DFS(CurStr, _CurCount + 1, _n, _m, NextX, NextY, _r, _c, _k);
+                CurStr.pop_back();
             }
         }
     }
@@ -97,19 +80,17 @@ string solution(int n, int m, int x, int y, int r, int c, int k)
 
     vecMap[r][c] = 'E';
 
-    std::vector<string> vecStr;
+    std::string Str;
 
-    BFS(vecStr, n, m, y, x, r, c, k);
+    DFS(Str, 0, n, m, y, x, r, c, k);
 
-    if (!vecStr.empty())
-        answer = vecStr[0];
+    if (!resultStr.empty())
+        answer = resultStr;
     else
         answer = "impossible";
 
-    return answer;
+    return resultStr;
 }
-
-
 
 int main()
 {
