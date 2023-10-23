@@ -8,87 +8,100 @@
 
 char arr[1000][1000];
 bool check[1000][1000];
-int map[1000][1000];
+bool moveCheck[1000][1000];
 int mapRun[1000][1000];
-int mapBurn[1000][1000];
 
 int T, W, H;
 bool RunCheck = false;
 std::queue<std::pair<int, int>> queueFire;
-std::vector<int> vecValue;
+int resValue = 999999999;
 
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
 
-int BFS(int _x, int _y, bool burning, bool Run)
+void BFS(int _x, int _y)
 {
     std::queue<std::pair<int, int>> q;
-
-    if (!burning)
-    {
-        check[_y][_x] = true;
-        q.push({ _x, _y });
-    }
+    std::queue<std::pair<int, int>> moveQ;
+    std::queue<std::pair<int, int>> fireQ;
+    q.push({ _x, _y });
     
-    else
-    {
-        while (!queueFire.empty())
-        {
-            q.push(queueFire.front());
-            queueFire.pop();
-        }
-    }
+    mapRun[_y][_x] = 1;
+    moveCheck[_y][_x] = true;
 
     while (!q.empty())
     {
-        int CurX = q.front().first;
-        int CurY = q.front().second;
-        q.pop();
-
-        for (int i = 0; i < 4; ++i)
+        // 불먼저 1회 BFS 탐색
+        while (!queueFire.empty())
         {
-            int NextX = CurX + dx[i];
-            int NextY = CurY + dy[i];
+            int CurX = queueFire.front().first;
+            int CurY = queueFire.front().second;
+            check[CurY][CurX] = true;
+            arr[CurY][CurX] = '*';
+            queueFire.pop();
 
-            if (Run)
+            for (int i = 0; i < 4; ++i)
             {
-                if ((NextX >= W || NextX < 0 || NextY >= H || NextY < 0))
+                int NextX = CurX + dx[i];
+                int NextY = CurY + dy[i];
+                
+                if (0 <= NextX && NextX < W && 0 <= NextY && NextY < H && check[NextY][NextX] == false)
                 {
-                    RunCheck = true;
-                    vecValue.push_back(mapRun[CurY][CurX]);
-                }
-
-                else if (NextX < W && NextX >= 0 && NextY < H && NextY >= 0)
-                {
-                    if (map[NextY][NextX] > 0 && !check[NextY][NextX])
+                    if (arr[NextY][NextX] == '.' || arr[NextY][NextX] == '@')
                     {
                         check[NextY][NextX] = true;
-                        q.push({ NextX, NextY });
+                        fireQ.push({ NextX, NextY });
                     }
                 }
             }
-            else if (NextX < W && NextX >= 0 && NextY < H && NextY >= 0 && arr[NextY][NextX] != '#')
-            {
-                if (burning && arr[NextY][NextX] != '*')
-                {
-                    mapBurn[NextY][NextX] += mapBurn[CurY][CurX] + 1;
-                    map[NextY][NextX] = mapBurn[NextY][NextX] - map[NextY][NextX];
-                    arr[NextY][NextX] = '*';
+        }
 
-                    q.push({ NextX, NextY });
-                }
-                else if(!burning && check[NextY][NextX] == false)
+        // 불 queue 충전
+        while (!fireQ.empty())
+        {
+            queueFire.push(fireQ.front());
+            fireQ.pop();
+        }
+        
+        // movequeue 충전
+        while (!q.empty())
+        {
+            moveQ.push(q.front());
+            q.pop();
+        }
+
+        while (!moveQ.empty())
+        {
+            int CurX = moveQ.front().first;
+            int CurY = moveQ.front().second;
+            moveQ.pop();
+
+            for (int i = 0; i < 4; ++i)
+            {
+                int NextX = CurX + dx[i];
+                int NextY = CurY + dy[i];
+
+                if (0 <= NextX && NextX < W && 0 <= NextY && NextY < H)
                 {
-                    check[NextY][NextX] = true;
-                    map[NextY][NextX] += map[CurY][CurX] + 1;
-                    mapRun[NextY][NextX] += mapRun[CurY][CurX] + 1;
-                    q.push({ NextX, NextY });
+                    if (moveCheck[NextY][NextX] == false && check[NextY][NextX] == false && arr[NextY][NextX] == '.')
+                    {
+                        mapRun[NextY][NextX] = mapRun[CurY][CurX] + 1;
+                        moveCheck[NextY][NextX] = true;
+                        q.push({ NextX, NextY });
+                    }
+                }
+
+                // 탈출성공
+                else
+                {
+                    resValue = std::min(mapRun[CurY][CurX], resValue);
+                    break;
                 }
             }
         }
     }
 
-    return -1;
+    return;
 }
 
 int main()
@@ -120,25 +133,19 @@ int main()
             }
         }
 
-        BFS(PosX, PosY, false, false);
-        BFS(PosX, PosY, true, false);
+        BFS(PosX, PosY);
 
-        std::fill(check[0], check[0] + 1000000, false);
-        int Value = BFS(PosX, PosY, false, true);
-        
-        if (vecValue.empty())
+        if (resValue == 999999999)
             std::cout << "IMPOSSIBLE\n";
         else
-        {
-            Value = *std::min_element(vecValue.begin(), vecValue.end()) + 1;
-            std::cout << Value << '\n';
-        }
+            std::cout << resValue << "\n";
 
         std::fill(check[0], check[0] + 1000000, false);
-        std::fill(map[0], map[0] + 1000000, 0);
+        std::fill(moveCheck[0], moveCheck[0] + 1000000, false);
         std::fill(mapRun[0], mapRun[0] + 1000000, 0);
-        std::fill(mapBurn[0], mapBurn[0] + 1000000, 0);
-        vecValue.clear();
+
+        resValue = 999999999;
+
         while (!queueFire.empty())
         {
             queueFire.pop();
