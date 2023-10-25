@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include <algorithm>
+#include <vector>
 #include <string>
 #include <list>
 
@@ -22,12 +24,20 @@ int main()
     {
         std::cin >> N;
         MyNode* RootNode = new MyNode;
-
+        std::vector<std::string> vecStr;
         bool NumberCheck = false;
         for (int i = 0; i < N; ++i)
         {
             std::string str;
             std::cin >> str;
+            vecStr.push_back(str);
+        }
+
+        std::sort(vecStr.begin(), vecStr.end());
+
+        for (int i = 0; i < vecStr.size(); ++i)
+        {
+            std::string str = vecStr[i];
 
             MyNode* CurNode = RootNode;
             auto iterBegin = CurNode->NodeList.begin();
