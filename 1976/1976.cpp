@@ -42,7 +42,7 @@ int main()
 	std::cin >> N >> M;
 	vecMap.resize(N + 1);
 	vecCheck.resize(N + 1);
-
+	
 	for (int i = 1; i <= N; ++i)
 	{
 		for (int j = 1; j <= N; j++)
