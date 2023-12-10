@@ -9,11 +9,12 @@ std::vector<std::vector<std::pair<int, int>>> vecTree;
 std::vector<int> vecLength;
 std::vector<bool> vecCheck;
 int Length = 0;
+int FarNode = 0;
 
 void DFS(int _V, int _value)
 {
     vecCheck[_V] = true;
-    
+
     for (int i = 0; i < vecTree[_V].size(); ++i)
     {
         int NextV = vecTree[_V][i].first;
@@ -21,15 +22,14 @@ void DFS(int _V, int _value)
         if (vecCheck[NextV])
             continue;
 
-        _value += vecTree[_V][i].second;
-        vecLength[NextV]
-        DFS(NextV, _value);
+        if (std::max(Length, _value + vecTree[_V][i].second) > Length)
+        {
+            Length = std::max(Length, _value + vecTree[_V][i].second);
+            FarNode = NextV;
+        }
 
-        _value -= vecTree[_V][i].second;
+        DFS(NextV, _value + vecTree[_V][i].second);
     }
-
-    if (_value > Length)
-        Length = _value;
 
     vecCheck[_V] = false;
 
@@ -52,6 +52,7 @@ int main()
 
     for (int i = 1; i <= V; ++i)
     {
+        int Check;
         std::cin >> u;
         while (true)
         {
@@ -59,13 +60,18 @@ int main()
 
             if (v == -1)
                 break;
-            
+
             std::cin >> cost;
             vecTree[u].push_back(std::make_pair(v, cost));
         }
     }
 
+    
     DFS(1, 0);
+    DFS(FarNode, 0);
+    
 
     std::cout << Length;
+
+    return 0;
 }

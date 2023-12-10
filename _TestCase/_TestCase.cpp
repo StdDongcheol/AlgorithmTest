@@ -300,72 +300,96 @@ MyClass func1()
 
 
 
-
+struct MyMode
+{
+	int a;
+};
 
 int main()
 {
-	
-	// 32bit : 16byte
-	// 64bit : 20byte
-	test t;
-	std::cout << '\n' << sizeof(t) << std::endl;
-	//unsigned int a = 150;
-	//int c = 0;
-	//for (unsigned int i = 0; i < a * 2; ++i)
+	std::list<MyMode> lsit;
+
+	std::list<MyMode>::iterator iter;
+
+	iter = std::find(lsit.begin(), lsit.end(), 5);
+
+	//std::vector<int> vec = { 1,3,4,5 };
+	////vec.resize(10000);
+	//auto iter = vec.begin();
+	//auto iterEnd = vec.end();
+	//
+	//std::cout << *iter;
+	//vec.erase(vec.begin() + 2);
+	////auto newIter= vec.insert(vec.begin() + 1, 89);
+	////auto reiter = vec.begin();
+	////
+	////if (iter == reiter)
+	////{
+	////	std::cout << *iter;
+	////}
+	//std::list<int> nnlist;
+	//
+	//// 32bit : 16byte
+	//// 64bit : 20byte
+	//test t;
+	//std::cout << '\n' << sizeof(t) << std::endl;
+	////unsigned int a = 150;
+	////int c = 0;
+	////for (unsigned int i = 0; i < a * 2; ++i)
+	////{
+	////	++c;
+	////}
+	////std::cout << c;
+	////int aa = 3, bb = 1;
+	////foo(&aa, &bb);
+	////
+	////Buy(2000000000, 1);
+	//
+	//
+	////PAClass value1;
+	////PAClass value2 = value1;
+	//
+	////str s1;
+	////std::cout << sizeof(s1);
+	//
+	////B B1;
+	////std::cout << sizeof(B1);
+	////int ta = 208;
+	////FuncBit(ta, 5, false);
+	////FuncBit(ta, 5, true);
+	////printf("%d", (((0xEF >> 1) << 2)));
+	//
+	//std::vector<int> newVec(5, 1);
+	//std::vector<int> newVec1(5, 1);
+	//std::unordered_map<int, char> um;
+	//
+	//const int ccc = 5;	
+	////std::cout << &ccc;
+	//
 	//{
-	//	++c;
+	//	double a = 0.1f;
+	//	double b = 0.3f;
+	//	double c = 0.1f;
+	//	double d = 0.3f;
+	//
 	//}
-	//std::cout << c;
-	//int aa = 3, bb = 1;
-	//foo(&aa, &bb);
+	//std::set<int, double> set1;
 	//
-	//Buy(2000000000, 1);
-
-
-	//PAClass value1;
-	//PAClass value2 = value1;
-
-	//str s1;
-	//std::cout << sizeof(s1);
-	
-	//B B1;
-	//std::cout << sizeof(B1);
-	//int ta = 208;
-	//FuncBit(ta, 5, false);
-	//FuncBit(ta, 5, true);
-	//printf("%d", (((0xEF >> 1) << 2)));
-
-	std::vector<int> newVec(5, 1);
-	std::vector<int> newVec1(5, 1);
-	std::unordered_map<int, char> um;
-
-	const int ccc = 5;	
-	//std::cout << &ccc;
-
-	{
-		double a = 0.1f;
-		double b = 0.3f;
-		double c = 0.1f;
-		double d = 0.3f;
-
-	}
-	std::set<int, double> set1;
-	
-	std::cout << sizeof(double) << std::endl;
-	std::cout << sizeof(MyClass);
-	MyClass My;
-	MyClass My2;
+	//std::cout << sizeof(double) << std::endl;
+	//std::cout << sizeof(MyClass);
+	//MyClass My;
+	//MyClass My2;
+	////
+	////My = func1();
+	//My2 = My;
 	//
-	//My = func1();
-	My2 = My;
-
- 	std::cout << My.c1 << std::endl;
-	CSharedPtr<MyClass> sharedMy = new MyClass();
-	sharedMy->dd1 = 999999;
-
-	MyClass* sharedMy2 = sharedMy;
-
-	double ddddd = sharedMy2->dd1;
+ 	//std::cout << My.c1 << std::endl;
+	//CSharedPtr<MyClass> sharedMy = new MyClass();
+	//sharedMy->dd1 = 999999;
+	//
+	//MyClass* sharedMy2 = sharedMy;
+	//
+	//double ddddd = sharedMy2->dd1;
 
 
 	return 0;

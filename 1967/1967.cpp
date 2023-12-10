@@ -3,55 +3,77 @@
 
 #include <iostream>
 #include <vector>
-#include <queue>
 
-std::vector<int> vecVisit;
-std::vector<int> vecDepth;
-std::vector<std::vector<int>> vecCheck;
+#define NONE -1
 
-void Inorder(int _Start, int _End, int _CurLevel, int _MaxLevel)
+std::vector<std::vector<std::pair<int, int>>> vecNodes(10001);
+std::vector<bool> vecVisit;
+
+int ResultWeight = 0;
+
+void DFS(int _CurIndex, int _SumWeight)
 {
-    if (_CurLevel >= _MaxLevel)
-        return;
+	// vecNodes 사이즈가 1일경우, 나는 단말노드로 간주하겠다.
 
-    if (_Start == _End)
-    {
-        vecCheck[_CurLevel].push_back(vecVisit[_Start]);
-        return;
-    }
-    int Center = (_Start + _End) / 2;
+	if (vecNodes[_CurIndex].size() == 1)
+	{
+		ResultWeight = std::max(ResultWeight, _SumWeight);
+		return;
+	}
 
-    vecCheck[_CurLevel].push_back(vecVisit[Center]);
+	for (int i = 0; i < vecNodes[_CurIndex].size(); ++i)
+	{
+		int NextIndex = vecNodes[_CurIndex][i].first;
+		int NextWeight = vecNodes[_CurIndex][i].second;
 
-	Inorder(_Start, Center - 1, _CurLevel + 1, _MaxLevel);
-	Inorder(Center + 1, _End, _CurLevel + 1, _MaxLevel);
+		if (vecVisit[NextIndex] == false)
+		{
+			vecVisit[NextIndex] = true;
+			DFS(NextIndex, _SumWeight + NextWeight);
+			vecVisit[NextIndex] = false;
+		}
+	}
+
+	return;
 }
-
 
 int main()
 {
-    int N;
-    std::cin >> N;
-    int Size = pow(2, N) - 1;
+	int N;
+	std::cin >> N;
+	vecVisit.resize(N + 1);
+	while (!std::cin.eof())
+	{
+		int U, V, W;
 
-    vecDepth.resize(Size + 1);
-    vecCheck.resize(Size + 1);
-    vecVisit.resize(Size + 1);
+		std::cin >> U >> V >> W;
+		if (std::cin.eof())
+			break;
+		vecNodes[U].push_back({V, W});
+		vecNodes[V].push_back({U, W});
+	}
 
-    for (int i = 0; i < Size; ++i)
-    {
-        std::cin >> vecVisit[i];
-    }
+	std::vector<int> vecTerminalNode;
+	for (int i = 1; i <= N; ++i)
+	{
+		size_t Size = vecNodes[i].size();
+		if (Size == 1)
+		{
+			vecTerminalNode.push_back(i);
+		}
+	}
 
-    Inorder(0, vecCheck.size(), 1, N);
+	for (int i = 0; i < vecTerminalNode.size(); ++i)
+	{
+		int TerminalIndex = vecTerminalNode[i];
+		vecVisit[TerminalIndex] = true;
+		vecVisit[vecNodes[TerminalIndex][0].first] = true;
+		DFS(vecNodes[TerminalIndex][0].first, vecNodes[TerminalIndex][0].second);
+		vecVisit[vecNodes[TerminalIndex][0].first] = false;
+		vecVisit[TerminalIndex] = false;
+	}
 
-    for (int i = 0; i < vecCheck.size(); ++i)
-    {
-        for (int j = 0; j < vecCheck[i].size(); ++j)
-        {
-            std::cout << vecCheck[i][j] << " ";
-        }
+	std::cout << ResultWeight;
 
-        std::cout << '\n';
-    }
+	return 0;
 }
