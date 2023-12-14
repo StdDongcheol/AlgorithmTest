@@ -2,55 +2,47 @@
 //
 
 #include <iostream>
-#include <map>
 #include <vector>
 
 int main()
 {
-	std::multimap<int, int> mmBal;
 	int N;
 	std::cin >> N;
-	std::vector<std::pair<bool, int>> vecBal;
+	std::vector<int> vecBal;
+	std::vector<int> vecArr;
 
 	for (int i = 0; i < N; ++i)
 	{
-		int H, Dist = i;
+		int H;
 		std::cin >> H;
-		vecBal.push_back({false, H});
-		mmBal.insert({ H, Dist });
+		vecBal.push_back(H);
 	}
 
-	int Count = 0;
-	for (int i = 0; i < N; ++i)
+	vecArr.push_back(vecBal[0]);
+
+	for (int i = 1; i < N; ++i)
 	{
-		if (vecBal[i].first == false)
+		bool check = false;
+
+		for (int j = 0; j < vecArr.size(); ++j)
 		{
-			vecBal[i].first = true;
-			int CurH = vecBal[i].second;
+			int CurH = vecArr[j] - 1;
 
-			int CurDist = i;
-			while(!mmBal.empty())
+			if (CurH == vecBal[i])
 			{
-				auto iter = mmBal.find(CurH);
-
-				if (iter == mmBal.end() || iter->second < CurDist)
-					break;
-				else
-				{
-					vecBal[iter->second].first = true;
-					CurDist = iter->second;
-					iter = mmBal.erase(iter);
-					--CurH;
-
-					if (CurH <= 0)
-						break;
-				}
+				check = true;
+				vecArr[j] -= 1;
+				break;
 			}
-			++Count;
+		}
+
+		if (check == false)
+		{
+			vecArr.push_back(vecBal[i]);
 		}
 	}
-	
-	std::cout << Count;
+
+	std::cout << vecArr.size();
 	
 	return 0;
 }
